@@ -11,6 +11,7 @@ export class AppComponent implements OnInit{
   
   public timePeriods = []; // Labels
   public chartData = [];
+  public stackedChartData = [];
   public servicesName = [];
   public chartType = 'bar';
   public chartLegend = true;
@@ -68,6 +69,33 @@ export class AppComponent implements OnInit{
             }
           }
         }
+
+        // stacked chart
+
+        // TODO
+
+        // for (let i = 0; i < lengthOfPeriods; i++) {
+        //   let dataForEachService = {'data' : [], 'label' : null, 'stack' : 'a'};
+        //   let valueForEachService = [];
+        //   for (let j = 0; j < lengthOfPeriods; j++) {
+        //     // metric types harcode, need to fix this later
+        //     if (typeof(allTimeCode[j].Groups[i]) != 'undefined') {
+        //       valueForEachService.push(parseFloat(allTimeCode[j].Groups[i].Metrics.UnblendedCost.Amount));
+        //     }
+        //   }
+        //   dataForEachService['data'] = valueForEachService;
+        //   this.chartData.push(dataForEachService);
+        // }
+        // // handle for missing data in chartData
+
+        // for (let i = 0; i < this.chartData.length; i ++) {
+        //   if (this.chartData[i].data.length < 30) {
+        //     while (this.chartData[i].data.length < 30) {
+        //       this.chartData[i].data.push(0);
+        //     }
+        //   }
+        // }
+
         console.log(this.chartData);
       },
       (error) => {

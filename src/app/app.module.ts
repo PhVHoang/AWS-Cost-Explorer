@@ -5,12 +5,16 @@ import { HttpClientModule } from '@angular/common/http'
 import { ChartsModule } from 'ng2-charts'
 
 import { AppComponent } from './app.component';
-import { FilterComponent } from './filter/filter.component';
+import { TableComponent } from './table/table.component';
+import { BarchartComponent } from './barchart/barchart.component';
+import { LinechartComponent } from './linechart/linechart.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    FilterComponent
+    TableComponent,
+    BarchartComponent,
+    LinechartComponent,
   ],
   imports: [
     BrowserModule,
