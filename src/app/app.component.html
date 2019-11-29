@@ -1,32 +1,20 @@
 <!-- hard code in fixed length as 26, need to fetch data from components -->
-<!-- <div *ngIf="chartData.length === 26">  
-  <div>
+<div class="p">
+  <h3>Select type of chart</h3>
+  <ng-select [items]="typeSelection">
+  </ng-select>
+</div>
+
+<div *ngIf="chartData.length === 27">  
+  <div class="chart-container" style="position:relative; height:35vh; width:70vw; margin:0 auto;">
     <div style="display: block">
       <canvas baseChart
               [datasets]="chartData"
               [labels]="timePeriods"
               [options]="barChartOptions"
               [legend]="chartLegend"
-              [chartType]="chartType">
+              [chartType]="chartType[0]">
       </canvas>
     </div>
   </div>
-</div> -->
-
-
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
-<body>
-
-<div ng-app="myApp" ng-controller="myCtrl">
-
-<select ng-model="selectedName" ng-options="x for x in names">
-</select>
-
 </div>
-
-<script>
-  var app = angular.module('myApp', []);
-  app.controller('myCtrl', function($scope) {
-    $scope.names = ["Emil", "Tobias", "Linus"];
-  });
-</script>

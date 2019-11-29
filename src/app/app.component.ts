@@ -11,31 +11,66 @@ export class AppComponent implements OnInit{
   title = 'AWS Cost Explorer';
   public jsonObject : any;
 
-  public barChartOptions = {
-    scaleShowVerticalLines: false,
-    responsive: true
+  public chartData  = [];
+  public timePeriods = [];
+  public chartType =  ["bar", "line", "stack"];
+  public charLegend: boolean = true;
+  public numServices: number = 0;
+  public barChartOptions:any = {
+    scales: {
+      xAxes: [{
+        stacked: true,
+        type: "time",
+        ticks: {
+          autoSkip: true,
+        maxTicksLimit: 10
+        }
+        
+      }],
+      yAxes: [{
+        stacked: true
+      }]
+    },
+    responsive: true,
+    maintainAspectRatio: true,
+    legend: {position: 'bottom'}
   };
 
   public cost : any;
 
-  constructor(private rest_get_usage: RestapiService) {}
+  public typeSelection = [
+    {id: 1, name: "Bar"},
+    {id: 2, name: "Stack"},
+    {id: 3, name: "Line"}
+  ];
+
+  constructor(private rest_get_usage: RestapiService,
+              private extract_json: ExtractJsonService) {}
   
-  ngOnInit() {
-    this.get_json_object();
+  ngOnInit() {    
+    this.extracted_json_data();
   }
   
-  public get_json_object() {
+  public extracted_json_data() {
     this.rest_get_usage.getCostUsage().subscribe(
       (response) => {
         this.cost = response;
         this.jsonObject = JSON.stringify(this.cost);
         this.jsonObject = JSON.parse(this.jsonObject);
         console.log(this.jsonObject);
+        this.extract_json.extract_json_data(this.jsonObject);
+        this.chartData = this.extract_json.chartData;
+        this.timePeriods = this.extract_json.timePeriods;
+        this.numServices = this.extract_json.servicesName.length;
+        console.log(this.numServices);
       },
       (error) => {
         console.log("No responsed data " + error);
+        return;
       }
     )
+    
+
   }
 
 }

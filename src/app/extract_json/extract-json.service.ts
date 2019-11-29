@@ -5,20 +5,15 @@ import { Injectable } from '@angular/core';
 })
 export class ExtractJsonService {
 
-  // Is it good setting jsonObject as any type?
-  public jsonObject : any; 
   public chartLabels = [];
   public chartData  = [];
-  public stackedChartData = [];
   public servicesName  = [];
   public timePeriods = [];
 
-  constructor(jsonObject : any) { 
-    this.jsonObject = jsonObject;
-  }
+  constructor() {}
 
-  public extract_json_data() {
-    let allTimeCode = this.jsonObject.ResultsByTime;
+  public extract_json_data(jsonObject : any) {
+    let allTimeCode = jsonObject.ResultsByTime;
     let lengthOfPeriods = allTimeCode.length;
     let numberOfUsedServices = allTimeCode[0].Groups.length;
 
@@ -52,6 +47,8 @@ export class ExtractJsonService {
         }
       }
     }
+
+    return this.timePeriods, this.chartData;
   }
 
 
